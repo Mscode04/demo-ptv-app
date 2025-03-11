@@ -1,0 +1,220 @@
+/* General Styles */
+.userpt-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .userpt-backButton {
+    background-color: transparent;
+    color: #005f73;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  
+  .userpt-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .userpt-profileHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .userpt-profileImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .userpt-profileImg img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  .userpt-profileHeader h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .userpt-infoTable table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .userpt-infoTable th, .userpt-infoTable td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .userpt-infoTable th {
+    background-color: #f4f4f4;
+    text-align: left;
+  }
+  
+  .userpt-equipmentsContainer, .userpt-medicinesContainer, .userpt-familyDetails {
+    margin-top: 20px;
+  }
+  
+  .userpt-equipmentsContainer h3, .userpt-medicinesContainer h3, .userpt-familyDetails h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .userpt-equipmentsContainer table, .userpt-medicinesContainer table, .userpt-familyDetails table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .userpt-equipmentsContainer th, .userpt-medicinesContainer th, .userpt-familyDetails th {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .userpt-equipmentsContainer td, .userpt-medicinesContainer td, .userpt-familyDetails td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .userpt-familyDetails table th {
+    background-color: #f4f4f4;
+  }
+  
+  .userpt-printButton {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .userpt-printButton:hover {
+    background-color: #005f73;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    .userpt-container {
+      padding: 10px;
+    }
+  
+    .userpt-profileHeader {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .userpt-profileImg {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .userpt-profileHeader h3 {
+      font-size: 16px;
+    }
+  
+    .userpt-infoTable table {
+      font-size: 14px;
+    }
+  
+    .userpt-equipmentsContainer table, .userpt-medicinesContainer table, .userpt-familyDetails table {
+      font-size: 14px;
+    }
+  
+    .userpt-equipmentsContainer th, .userpt-medicinesContainer th, .userpt-familyDetails th {
+      padding: 8px;
+    }
+  
+    .userpt-equipmentsContainer td, .userpt-medicinesContainer td, .userpt-familyDetails td {
+      padding: 8px;
+    }
+  
+    .userpt-printButton {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .userpt-profileImg {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .userpt-profileHeader h3 {
+      font-size: 14px;
+    }
+  
+    .userpt-infoTable table {
+      font-size: 12px;
+    }
+  
+    .userpt-equipmentsContainer table, .userpt-medicinesContainer table, .userpt-familyDetails table {
+      font-size: 12px;
+    }
+  
+    .userpt-equipmentsContainer th, .userpt-medicinesContainer th, .userpt-familyDetails th {
+      padding: 6px;
+    }
+  
+    .userpt-equipmentsContainer td, .userpt-medicinesContainer td, .userpt-familyDetails td {
+      padding: 6px;
+    }
+  
+    .userpt-printButton {
+      font-size: 12px;
+      padding: 6px;
+    }
+  }
+  @media print {
+    .hide-back-button {
+      display: none !important;
+    }
+  }
+
+  .userpt-printButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .userpt-printButton:hover {
+    background-color: #45a049;
+  }
+/* Add this style to make the family details table horizontally scrollable */
+.userpt-familyDetails {
+    margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
+  }
+  
+  .userpt-familyDetails table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Set a minimum width for the table */
+  }
+  
+  .userpt-familyDetails th,
+  .userpt-familyDetails td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
