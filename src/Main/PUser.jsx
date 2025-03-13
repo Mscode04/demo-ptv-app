@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "../Firebase/config";
-import { doc, getDoc } from "firebase/firestore";
-import { useParams, useNavigate } from "react-router-dom";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "./PUser.css";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
@@ -97,75 +97,97 @@ const PUser = () => {
     window.print(); // Trigger the browser's print dialog
   };
 
+  const deletePatient = async () => {
+    const confirmationCode = prompt("Please enter the confirmation code to delete this patient:");
+    if (confirmationCode === "2012") {
+      try {
+        await deleteDoc(doc(db, "Patients", patientId));
+        alert("Patient deleted successfully!");
+        navigate("/main"); // Redirect to the main page after deletion
+      } catch (error) {
+        console.error("Error deleting patient: ", error);
+        alert("Failed to delete patient.");
+      }
+    } else {
+      alert("Incorrect confirmation code. Deletion canceled.");
+    }
+  };
+
   if (!patient) {
-    return          <div className="loading-container">
-    <img
-      src="https://media.giphy.com/media/YMM6g7x45coCKdrDoj/giphy.gif"
-      alt="Loading..."
-      className="loading-image"
-    />
-  </div>;
+    return (
+      <div className="puser-loading-container">
+        <img
+          src="https://media.giphy.com/media/YMM6g7x45coCKdrDoj/giphy.gif"
+          alt="Loading..."
+          className="puser-loading-image"
+        />
+      </div>
+    );
   }
 
   return (
-    <div ref={componentRef} className="userpt-container">
-      <button className="userpt-backButton hide-back-button" onClick={() => navigate(-1)}>
+    <div ref={componentRef} className="puser-container">
+      <button className="puser-backButton" onClick={() => navigate(-1)}>
         &#8592; Back
       </button>
-      <h2>Bystander Details</h2>
-      <div className="userpt-card" ref={componentRef}>
-        <div className="userpt-profileHeader">
-      
+      <h2>Patient Details</h2>
+      <div className="puser-card">
+        <div className="puser-profileHeader">
+          <img
+            src={patient.profilePic || "https://cliply.co/wp-content/uploads/2020/10/442010811_HEADPHONES_AVATAR_3D_400px.gif"}
+            alt="Profile"
+            className="puser-profileImg"
+          />
           <h3>{patient.name || "N/A"}</h3>
         </div>
 
         {/* Patient Information Table */}
-        <div className="userpt-infoTable">
+        <div className="puser-infoTable">
           <table>
             <tbody>
               <tr>
-                <td><strong>Address:</strong></td>
-                <td>{patient.address || "N/A"}</td>
+                <td><strong>Reg No:</strong></td>
+                <td>{patient.registernumber || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Age:</strong></td>
-                <td>{patient.age || "N/A"}</td>
+                <td><strong>Registration Date:</strong></td>
+                <td>{patient.registrationDate || "N/A"}</td>
+              </tr>
+              <tr>
+                <td><strong>Address:</strong></td>
+                <td>{patient.address || "N/A"}</td>
               </tr>
               <tr>
                 <td><strong>Location:</strong></td>
                 <td>{patient.location || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Asha Worker:</strong></td>
-                <td>{patient.ashaWorker || "N/A"}</td>
+                <td><strong>Ward:</strong></td>
+                <td>{patient.ward || "N/A"}</td>
+              </tr>
+              <tr>
+                <td><strong>Age:</strong></td>
+                <td>{patient.age || "N/A"}</td>
+              </tr>
+              <tr>
+                <td><strong>Gender:</strong></td>
+                <td>{patient.gender || "N/A"}</td>
               </tr>
               <tr>
                 <td><strong>Category:</strong></td>
                 <td>{patient.category || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Community Volunteer:</strong></td>
-                <td>{patient.communityVolunteer || "N/A"}</td>
-              </tr>
-              <tr>
-                <td><strong>Community Volunteer Phone:</strong></td>
-                <td>{patient.communityVolunteerPhone || "N/A"}</td>
+                <td><strong>Date of Birth:</strong></td>
+                <td>{patient.dob || "N/A"}</td>
               </tr>
               <tr>
                 <td><strong>Current Difficulties:</strong></td>
                 <td>{patient.currentDifficulties || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Date of Birth:</strong></td>
-                <td>{patient.dob || "N/A"}</td>
-              </tr>
-              <tr>
                 <td><strong>Email:</strong></td>
                 <td>{patient.email || "N/A"}</td>
-              </tr>
-              <tr>
-                <td><strong>Gender:</strong></td>
-                <td>{patient.gender || "N/A"}</td>
               </tr>
               <tr>
                 <td><strong>Main Caretaker:</strong></td>
@@ -200,6 +222,10 @@ const PUser = () => {
                 <td>{patient.patientId || "N/A"}</td>
               </tr>
               <tr>
+                <td><strong>Relative Phone:</strong></td>
+                <td>{patient.relativePhone || "N/A"}</td>
+              </tr>
+              <tr>
                 <td><strong>Referral Person:</strong></td>
                 <td>{patient.referralPerson || "N/A"}</td>
               </tr>
@@ -208,20 +234,12 @@ const PUser = () => {
                 <td>{patient.referralPhone || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Registered Date & Time:</strong></td>
-                <td>{patient.registerTime ? new Date(patient.registerTime).toLocaleString() : "N/A"}</td>
+                <td><strong>Community Volunteer:</strong></td>
+                <td>{patient.communityVolunteer || "N/A"}</td>
               </tr>
               <tr>
-                <td><strong>Registration Date:</strong></td>
-                <td>{patient.registrationDate || "N/A"}</td>
-              </tr>
-              <tr>
-                <td><strong>Relative Phone:</strong></td>
-                <td>{patient.relativePhone || "N/A"}</td>
-              </tr>
-              <tr>
-                <td><strong>Ward:</strong></td>
-                <td>{patient.ward || "N/A"}</td>
+                <td><strong>Community Volunteer Phone:</strong></td>
+                <td>{patient.communityVolunteerPhone || "N/A"}</td>
               </tr>
               <tr>
                 <td><strong>Ward Member:</strong></td>
@@ -231,34 +249,31 @@ const PUser = () => {
                 <td><strong>Ward Member Phone:</strong></td>
                 <td>{patient.wardMemberPhone || "N/A"}</td>
               </tr>
+              <tr>
+                <td><strong>Asha Worker:</strong></td>
+                <td>{patient.ashaWorker || "N/A"}</td>
+              </tr>
+              <tr>
+                <td><strong>STATUS:</strong></td>
+                <td style={{ display: "flex", alignItems: "center", gap: "8px", color: patient.deactivated ? "red" : "green" }}>
+                  <span
+                    style={{
+                      width: "10px",
+                      height: "10px",
+                      borderRadius: "50%",
+                      backgroundColor: patient.deactivated ? "red" : "green",
+                      display: "inline-block",
+                    }}
+                  ></span>
+                  {patient.deactivated ? "INACTIVE" : "ACTIVE"}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <div className="userpt-equipmentsContainer">
-          <h3>Medical Condition</h3>
-          {conditions.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th> Medical Condition</th>
-                </tr>
-              </thead>
-              <tbody>
-                {conditions.map((condition, index) => (
-                  <tr key={index}>
-                    <td>{condition.conditionName}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No conditions found for this patient.</p>
-          )}
-        </div>
-
         {/* Medicines Section */}
-        <div className="userpt-medicinesContainer">
+        <div className="puser-medicinesContainer">
           <h3>Medicines</h3>
           {medicines.length > 0 ? (
             <table>
@@ -286,8 +301,37 @@ const PUser = () => {
           )}
         </div>
 
+        {/* Equipments Section */}
+        <div className="puser-equipmentsContainer">
+          <h3>Equipments</h3>
+          {equipments.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Equipment Name</th>
+                  <th>Provided Date</th>
+                  <th>Return Date</th>
+                  <th>Damage</th>
+                </tr>
+              </thead>
+              <tbody>
+                {equipments.map((equipment, index) => (
+                  <tr key={index}>
+                    <td>{equipment.equipmentName}</td>
+                    <td>{equipment.providedDate}</td>
+                    <td>{equipment.returnDate}</td>
+                    <td>{equipment.damage ? "Yes" : "No"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No equipments found for this patient.</p>
+          )}
+        </div>
+
         {/* Family Details Section */}
-        {/* <div className="userpt-familyDetails">
+        <div className="puser-familyDetails">
           <h3>Family Details</h3>
           {familyDetails.length > 0 ? (
             <table>
@@ -319,37 +363,20 @@ const PUser = () => {
           ) : (
             <p>No family details found for this patient.</p>
           )}
-        </div> */}
-
-        {/* Equipments Section */}
-        <div className="userpt-equipmentsContainer">
-          <h3>Equipments</h3>
-          {equipments.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Equipment Name</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {equipments.map((equipment, index) => (
-                  <tr key={index}>
-                    <td>{equipment.equipmentName}</td>
-                    <td>{equipment.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No equipment found for this patient.</p>
-          )}
         </div>
 
-        {/* Print Button */}
-        <button className="userpt-printButton hide-back-button" onClick={handlePrint}>
-          Download
-        </button>
+     
+
+        {/* Update and Delete Buttons */}
+        <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+          <button 
+            className="puser-updateButton" 
+            style={{ flex: 1 }} 
+            onClick={handlePrint}
+          >
+            Download
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -3,9 +3,9 @@ import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import LoginPage from "./Main/LoginPage";
 import Main from "./Main/Main";
 import User from "./Main/User";
-import PUser from "./Main/PUser"; // Import the new PUser component
+import Chatbot from "./Main/Chatbot";
+import PUser from "./Main/PUser";
 import Logout from "./Main/Logout"; // Import the Logout component
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("isAuthenticated") === "true"
@@ -120,6 +120,10 @@ function App() {
         <Route
           path="/puser/:patientId"
           element={<PUser />} // This is the new component for viewing patient details
+        />
+        <Route
+          path="/chatbot"
+          element={<Chatbot />} // This is the new component for viewing patient details
         />
 
         {/* Fallback for /users without patientId */}
