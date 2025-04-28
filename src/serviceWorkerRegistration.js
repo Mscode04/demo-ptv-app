@@ -1,5 +1,6 @@
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' || // Check for localhost
+  window.location.hostname === 'shaheenkp.in' || // Check for localhost
   window.location.hostname === '[::1]' || // Check for IPv6 localhost
   window.location.hostname.match(/^127(\.\d{1,3}){3}$/) // Check for IPv4 localhost
 );

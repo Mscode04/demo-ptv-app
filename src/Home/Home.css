@@ -1,37 +1,103 @@
-/* General Styles */
-.HomeApp {
-  background-color: #288598;
-  min-height: 100vh;
-  color: white;
-  padding-bottom: 10px;
-  margin-bottom: -10px;
+/**
+ * Home Application Stylesheet
+ * 
+ * Features:
+ * - CSS variables for easy theming
+ * - Organized by component sections
+ * - Responsive design considerations
+ * - Accessibility best practices
+ * - Detailed comments for maintenance
+ */
+
+:root {
+  /* Primary Color Palette */
+  --color-primary: #288598;
+  --color-primary-dark: #1e506b;
+  --color-primary-light: #3b85ac;
+  --color-primary-very-light: #a8d5de13;
+
+  /* Secondary Colors */
+  --color-secondary: #77b4c0;
+  --color-danger: #dc3545;
+  --color-danger-dark: #c82333;
+  --color-white: #ffffff;
+  --color-gray: #666666;
+
+  /* Border Styles */
+  --border-radius: 8px;
+  --border-width: 2px;
+  --border-color: var(--color-white);
+
+  /* Shadows */
+  --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-focus: 0 0 5px rgba(59, 133, 172, 0.5);
+
+  /* Spacing */
+  --spacing-small: 10px;
+  --spacing-medium: 15px;
+  --spacing-large: 20px;
+
+  /* Transitions */
+  --transition-duration: 0.3s;
+  --transition-easing: ease-in-out;
+
+  /* Z-index layers */
+  --z-index-topbar: 10;
+  --z-index-drawer: 15;
 }
 
-/* Topbar Styles */
+/* ==================== BASE STYLES ==================== */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* ==================== LAYOUT COMPONENTS ==================== */
+
+/**
+ * Home Application Container
+ * Sets the base styling for the entire application
+ */
+.HomeApp {
+  background-color: var(--color-primary);
+  min-height: 100vh;
+  color: var(--color-white);
+  padding-bottom: var(--spacing-small);
+  margin-bottom: calc(-1 * var(--spacing-small));
+}
+
+/**
+ * Top Bar Component
+ * Fixed position header at the top of the page
+ */
 .HomeTopbar {
   height: 30px;
-  background-color: #a8d5de13;
+  background-color: var(--color-primary-very-light);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: var(--z-index-topbar);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 var(--spacing-large);
 }
 
-/* Drawer Styles */
-/* Drawer Styles */
+/* ==================== DRAWER COMPONENT ==================== */
+
+/**
+ * Drawer Container
+ * Off-canvas navigation menu
+ */
 .HomeDrawer {
   position: fixed;
   top: 0;
   left: -250px;
   width: 250px;
   height: 100%;
-  background-color: #ffffff;
-  padding: 20px;
-  transition: left 0.3s ease-in-out;
-  z-index: 15;
+  background-color: var(--color-white);
+  padding: var(--spacing-large);
+  transition: left var(--transition-duration) var(--transition-easing);
+  z-index: var(--z-index-drawer);
   display: flex;
   flex-direction: column;
 }
@@ -40,59 +106,57 @@
   left: 0;
 }
 
+/**
+ * Drawer Buttons
+ * Includes both navigation buttons and close button
+ */
 .HomeDrawerButton {
-  background-color: #288598;
-  color: white;
-  border-radius: 8px;
-  width: 100% !important; /* Ensures full width */
-  margin-bottom: 10px;
-  padding: 10px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--border-radius);
+  width: 100%;
+  margin-bottom: var(--spacing-small);
+  padding: var(--spacing-small);
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color var(--transition-duration) var(--transition-easing);
   text-align: center;
-  text-decoration: none; /* Remove underline from link */
-  display: block; /* Ensures full width for anchor tags */
+  text-decoration: none;
+  display: block;
 }
 
 .HomeDrawerButton:hover {
-  background-color: #1e506b;
-  color: #ffffff;
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
 }
 
 .HomeDrawerCloseButton {
   background: none;
   border: none;
   margin-right: auto;
-  color: #288598;
+  color: var(--color-primary);
   font-size: 24px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-large);
 }
 
+/**
+ * Drawer Content Organization
+ */
 .drawer-content {
-  flex: 1; /* Takes up remaining space */
+  flex: 1;
 }
 
 .drawer-footer {
-  margin-top: auto; /* Pushes footer to the bottom */
+  margin-top: auto;
   text-align: center;
 }
 
-.btn-danger {
-  background-color: #dc3545; /* Red color for logout button */
-}
+/* ==================== BANNER SECTION ==================== */
 
-.btn-danger:hover {
-  background-color: #c82333; /* Darker red on hover */
-}
-
-.powered-by {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #666;
-}
-/* Banner Section */
+/**
+ * Hero Banner Component
+ */
 .HomeBanner {
   background-image: url("../assets/img/home-banner-nurse.jpg");
   background-size: cover;
@@ -107,48 +171,54 @@
 }
 
 .HomeBanner h1 {
-  color: white;
-  margin-bottom: 20px;
+  color: var(--color-white);
+  margin-bottom: var(--spacing-large);
 }
 
+/**
+ * Banner Button Group
+ */
 .HomeBannerButtons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-small);
 }
 
 .HomeBannerButton {
   font-size: 16px;
   background-color: transparent;
-  color: white;
-  border: 2px solid white;
-  border-radius: 8px;
-  padding: 10px 15px;
-  transition: all 0.3s ease-in-out;
+  color: var(--color-white);
+  border: var(--border-width) solid var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-small) var(--spacing-medium);
+  transition: all var(--transition-duration) var(--transition-easing);
   text-decoration: none;
 }
 
 .HomeBannerButton:hover {
-  background-color: #288598;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 
-/* Reports Section */
+/* ==================== REPORTS SECTION ==================== */
+
 .HomeReports {
-  
-  border-radius: 8px;
-  
-  margin: 20px;
+  border-radius: var(--border-radius);
+  margin: var(--spacing-large);
+ 
 }
 
 .HomeReportsTitle {
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-medium);
 }
 
+/**
+ * Responsive card grid layout
+ */
 .HomeReportsCards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 15px;
+  gap: var(--spacing-medium);
 }
 
 .HomeReportCardLink {
@@ -156,52 +226,53 @@
 }
 
 .HomeReportCard {
-  background-color: #77b4c0;
-  border-radius: 8px;
-  padding: 15px;
-  color: white;
+  background-color: var(--color-secondary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-medium);
+  color: var(--color-white);
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease-in-out;
+  gap: var(--spacing-small);
+  box-shadow: var(--shadow-default);
+  transition: background-color var(--transition-duration) var(--transition-easing);
 }
 
 .HomeReportCard:hover {
-  background-color: #3b85ac;
+  background-color: var(--color-primary-light);
 }
 
 .HomeReportIcon {
   font-size: 24px;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .HomeReportInfo h5 {
   margin: 0;
 }
-.HomeReportCard img{
+
+.HomeReportCard img {
   height: 60px;
   width: 60px;
-
-  border-radius:100%;
+  border-radius: 100%;
 }
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .HomeDrawer {
-    width: 200px;
-  }
 
-  .HomeBannerButtons {
-    gap: 10px;
-  }
+/* ==================== UTILITY CLASSES ==================== */
 
-  .HomeReportsCards {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
+/**
+ * Button Styles
+ */
+.btn-danger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
 }
-.btn-danger{
-  background-color: brown;
+
+.btn-danger:hover {
+  background-color: var(--color-danger-dark);
 }
+
+/**
+ * Loading Indicator
+ */
 .loading-container {
   display: flex;
   justify-content: center;
@@ -210,28 +281,60 @@
 }
 
 .loading-image {
-  width: 100px;  /* Adjust size if necessary */
+  width: 100px;
   height: auto;
 }
 
+/**
+ * Filter Components
+ */
 .filter-section select {
-  background-color: #288598; /* Matching the primary theme color */
-  color: white;
-  border: 2px solid #1e506b; /* Darker shade for border */
-  border-radius: 8px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: var(--border-width) solid var(--color-primary-dark);
+  border-radius: var(--border-radius);
   padding: 8px 12px;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-duration) var(--transition-easing);
 }
 
 .filter-section select:hover {
-  background-color: #1e506b; /* Darker shade on hover */
-  border-color: #288598;
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary);
 }
 
 .filter-section select:focus {
   outline: none;
-  border-color: #3b85ac; /* Highlight color when focused */
-  box-shadow: 0 0 5px rgba(59, 133, 172, 0.5); /* Subtle glow effect */
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-focus);
 }
+
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-large: 15px;
+    --spacing-medium: 10px;
+  }
+
+  .HomeDrawer {
+    width: 200px;
+  }
+
+  .HomeBannerButtons {
+    gap: var(--spacing-small);
+  }
+
+  .HomeReportsCards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/**
+ * Accessibility Considerations:
+ * - Sufficient color contrast
+ * - Focus states for interactive elements
+ * - Semantic HTML structure
+ * - Responsive typography would be added in a production environment
+ */
