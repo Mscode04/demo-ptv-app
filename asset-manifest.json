@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/demo-ptv-app/static/css/main.f54dcd1a.css",
-    "main.js": "/demo-ptv-app/static/js/main.a5a2e10e.js",
+    "main.css": "/demo-ptv-app/static/css/main.b6fbbeef.css",
+    "main.js": "/demo-ptv-app/static/js/main.96d0c38e.js",
     "static/js/239.6e0b9c23.chunk.js": "/demo-ptv-app/static/js/239.6e0b9c23.chunk.js",
     "static/js/213.3088029c.chunk.js": "/demo-ptv-app/static/js/213.3088029c.chunk.js",
     "static/js/455.b93efc79.chunk.js": "/demo-ptv-app/static/js/455.b93efc79.chunk.js",
     "static/media/home-banner-nurse.jpg": "/demo-ptv-app/static/media/home-banner-nurse.4187a4847bd8808a8794.jpg",
     "index.html": "/demo-ptv-app/index.html",
-    "main.f54dcd1a.css.map": "/demo-ptv-app/static/css/main.f54dcd1a.css.map",
-    "main.a5a2e10e.js.map": "/demo-ptv-app/static/js/main.a5a2e10e.js.map",
+    "main.b6fbbeef.css.map": "/demo-ptv-app/static/css/main.b6fbbeef.css.map",
+    "main.96d0c38e.js.map": "/demo-ptv-app/static/js/main.96d0c38e.js.map",
     "239.6e0b9c23.chunk.js.map": "/demo-ptv-app/static/js/239.6e0b9c23.chunk.js.map",
     "213.3088029c.chunk.js.map": "/demo-ptv-app/static/js/213.3088029c.chunk.js.map",
     "455.b93efc79.chunk.js.map": "/demo-ptv-app/static/js/455.b93efc79.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f54dcd1a.css",
-    "static/js/main.a5a2e10e.js"
+    "static/css/main.b6fbbeef.css",
+    "static/js/main.96d0c38e.js"
   ]
 }
